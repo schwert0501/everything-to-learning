@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html 目录页模板（index-template.html）
+  用法：复制本文件为输出目录的 index.html，然后：
+  1. 修改 <title>、封面信息（主题、简介、章节数、预计时长）
+  2. 把 window.CHAPTERS 替换为完整章节清单（与每个章节页内嵌的保持一致）
+  3. 填充学习路线（roadmap）与章节卡片（chapter-card），每章一张卡片
+  4. 保留 style.css / app.js 引用与全部结构块
+  ============================================================ -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主题学习资料 · 目录</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    /* 完整章节清单：与每个章节页内嵌的 window.CHAPTERS 保持【完全一致】。
+       objectives = 该章学习目标条数（进度条按此计算） */
+    window.CHAPTERS = [
+      { file: "01-overview.html", title: "领域概览", objectives: 4 },
+      { file: "02-setup.html", title: "环境搭建与第一个例子", objectives: 4 }
+      /* …在此追加全部章节，数量与标题须与实际文件一致 */
+    ];
+  </script>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">主题学习资料</a></h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换到深色模式">🌙 深色模式</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ========== 封面 ========== -->
+    <section class="cover">
+      <span class="cover-tag">📘 零基础 → 实战</span>
+      <h1>主题学习资料</h1>
+      <p class="cover-desc">（一句话介绍这套资料：学什么、适合谁、学完能获得什么。）本资料共 <strong>N 章</strong>，按认知阶梯编排，建议按顺序学习，每章末尾都有自测题检验掌握程度。</p>
+      <p class="cover-meta">预计总时长：约 X 小时 ｜ 建议节奏：每周 Y 章 ｜ 浏览器打开，Chrome 体验最佳（支持进度记录）</p>
+    </section>
+
+    <!-- ========== 学习路线 ========== -->
+    <h2>🗺️ 学习路线（循序渐进）</h2>
+    <div class="roadmap">
+      <div class="rm-item"><div class="rm-title">第 1-2 章 · 入门</div><div class="rm-desc">认识领域、搭好环境、跑起第一个例子，建立信心。</div></div>
+      <div class="rm-item"><div class="rm-title">第 3-5 章 · 核心概念</div><div class="rm-desc">逐个大概念讲透，配图配例，打牢地基。</div></div>
+      <div class="rm-item"><div class="rm-title">第 6-8 章 · 进阶</div><div class="rm-desc">底层原理、最佳实践、常见模式。</div></div>
+      <div class="rm-item"><div class="rm-title">第 9-10 章 · 实战</div><div class="rm-desc">用贯穿性案例把前面所学串起来。</div></div>
+      <div class="rm-item"><div class="rm-title">第 11-12 章 · 收尾</div><div class="rm-desc">常见坑与排错、总结与进阶路线。</div></div>
+    </div>
+
+    <!-- ========== 章节卡片 ========== -->
+    <h2>📑 章节目录</h2>
+    <div class="chapter-grid">
+      <!-- 每章一张卡片：编号 + 标题 + 学习目标摘要，href 指向章节文件 -->
+      <a class="chapter-card" href="01-overview.html">
+        <div class="cc-num">第 01 章</div>
+        <div class="cc-title">领域概览</div>
+        <div class="cc-goals">学习目标：XX 是什么、核心概念全景、典型应用场景、建立学习路线。</div>
+      </a>
+      <a class="chapter-card" href="02-setup.html">
+        <div class="cc-num">第 02 章</div>
+        <div class="cc-title">环境搭建与第一个例子</div>
+        <div class="cc-goals">学习目标：安装配置、运行第一个例子、验证环境、了解常用命令。</div>
+      </a>
+      <!-- …每章追加一张卡片 -->
+    </div>
+
+    <!-- ========== 进度总览（app.js 自动填充进度条） ========== -->
+    <h2>📊 学习进度</h2>
+    <div class="progress-list">
+      <!-- 每章一个进度条：data-progress-chapter=文件名，data-total=目标条数 -->
+      <div class="progress-item" data-progress-chapter="01-overview.html" data-total="4">
+        <div class="pi-label"><a href="01-overview.html">第 01 章 · 领域概览</a><span class="bar-text">0/4 已掌握</span></div>
+        <div class="progress-track"><div class="bar-fill"></div></div>
+      </div>
+      <div class="progress-item" data-progress-chapter="02-setup.html" data-total="4">
+        <div class="pi-label"><a href="02-setup.html">第 02 章 · 环境搭建与第一个例子</a><span class="bar-text">0/4 已掌握</span></div>
+        <div class="progress-track"><div class="bar-fill"></div></div>
+      </div>
+      <!-- …每章追加一个进度条，与章节卡片一一对应 -->
+    </div>
+
+    <!-- ========== 学习建议 ========== -->
+    <h2>💬 学习建议</h2>
+    <div class="callout tip">
+      <div class="callout-title">怎么用好这套资料</div>
+      <ul>
+        <li>按章节顺序学习，每章先看「学习目标」，学完勾选，进度会自动保存在浏览器里（换浏览器/清缓存会丢失）。</li>
+        <li>每章的泳道图/架构图先自己复述一遍，再看图下说明——能讲出来才算真懂。</li>
+        <li>自测题不要只看答案，先闭卷写一遍。</li>
+        <li>遇到图表不显示？可能是离线打开：图表会自动降级为源码文本，联网刷新即可恢复渲染。</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">主题学习资料 · 共 N 章 · 建议使用 Chrome 等现代浏览器阅读</div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

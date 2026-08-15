@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html 章节页模板（chapter-template.html）
+  用法：每个章节文件都基于本模板。把本文件复制为新章节文件，
+  然后：
+  1. 修改 <title> 与 window.CURRENT（当前章节文件名）
+  2. 把 window.CHAPTERS 换成与 index.html 完全一致的完整章节清单
+  3. 替换以下所有【示例】内容为真实内容，结构块一个都不要删
+  4. 保留 style.css / app.js 引用（相对路径 assets/）
+  ============================================================ -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 标题格式：章节号 · 章节标题 — 主题学习资料 -->
+  <title>01 · 领域概览 — 主题学习资料</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <!-- highlight.js 主题（CDN，离线时无高亮但不影响阅读） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+  <script>
+    /* 章节清单：与 index.html 中的 window.CHAPTERS 保持【完全一致】 */
+    window.CHAPTERS = [
+      { file: "01-overview.html", title: "领域概览", objectives: 5 },
+      { file: "02-setup.html", title: "环境搭建与第一个例子", objectives: 4 }
+      /* …在此追加全部章节，数量与标题须与实际文件一致 */
+    ];
+    /* 当前章节文件名（必须与文件名一致，app.js 据此生成上/下一章导航） */
+    window.CURRENT = "01-overview.html";
+  </script>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="brand">
+        <span class="chapter-badge">01</span>
+        <h1 class="site-title"><a href="index.html">主题学习资料</a></h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换到深色模式">🌙 深色模式</button>
+    </div>
+  </header>
+
+  <!-- 章节导航：留空容器即可，app.js 自动填充「返回目录/上一章/下一章」 -->
+  <nav id="chapter-nav" aria-label="章节导航"></nav>
+
+  <main class="container">
+    <article>
+
+      <h1>第 01 章 · 领域概览</h1>
+      <div class="chapter-meta">
+        <span class="chip">⏱ 建议用时：45 分钟</span>
+        <span class="chip">📖 前置要求：无</span>
+      </div>
+
+      <!-- 【学习目标】3-6 条可勾选；data-key 可留空（app.js 自动生成） -->
+      <section class="objectives" aria-label="本章学习目标">
+        <h2>🎯 本章学习目标（学完勾选，进度自动记录）</h2>
+        <ul>
+          <li><input type="checkbox" class="obj-check"><label>能用自己的话说清楚 XX 是什么、解决什么问题</label></li>
+          <li><input type="checkbox" class="obj-check"><label>了解 XX 的核心概念与全景图</label></li>
+          <li><input type="checkbox" class="obj-check"><label>知道 XX 的典型应用场景与业界案例</label></li>
+          <li><input type="checkbox" class="obj-check"><label>建立后续学习路线图</label></li>
+        </ul>
+      </section>
+
+      <!-- 【上一章回顾】第 01 章可省；后续章节开头放一句衔接 -->
+      <blockquote><strong>上一章回顾：</strong>（第 02 章起写：上一章你掌握了什么，本章会怎么用上它）</blockquote>
+
+      <h2>1.1 为什么学 XX</h2>
+      <p>（正文段落。用生活化类比讲清 XX 是什么、解决什么问题；说清楚学完能做什么。术语首次出现要<strong>加粗</strong>。）</p>
+
+      <div class="callout tip">
+        <div class="callout-title">💡 一句话理解</div>
+        <p>（把本章最核心的概念压缩成一句可记住的话。）</p>
+      </div>
+
+      <!-- 【提示框】info / tip / warning / danger 四种 -->
+      <div class="callout warning">
+        <div class="callout-title">⚠️ 常见误区</div>
+        <p>（初学者最容易误解的点。）</p>
+      </div>
+
+      <h2>1.2 核心概念全景</h2>
+      <p>（介绍本章涉及的 2-3 个核心概念，配一张图。）</p>
+
+      <!-- ========== 【泳道图】多角色/多系统协作流程用（首选） ==========
+           结构：data-variant="h"（横向泳道，泳道=行）；泳道颜色 data-lane="l1".."l5"
+           步骤卡片放 .sw-cell 内，多个步骤用 <span class="sw-arrow">→</span> 连接
+           aria-label 必写；图下方必须配 .sw-note 文字说明 -->
+      <h3>图 1-1 一次典型的 XX 流程（泳道图）</h3>
+      <div class="swimlane" data-variant="h" style="--sw-lanes: 3;" role="img" aria-label="用户、客户端、服务端三方协作的 XX 流程泳道图">
+        <div class="sw-head">
+          <span class="sw-stage">阶段</span>
+          <span data-lane="l1">用户</span>
+          <span data-lane="l2">客户端</span>
+          <span data-lane="l3">服务端</span>
+        </div>
+        <div class="sw-row">
+          <span class="sw-stage">步骤 1</span>
+          <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">发起操作</span></div></div>
+          <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">封装请求</span><span class="sw-arrow">→</span><span class="sw-step">发送</span></div></div>
+          <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">接收并校验</span></div></div>
+        </div>
+        <div class="sw-row">
+          <span class="sw-stage">步骤 2</span>
+          <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">查看结果</span></div></div>
+          <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">渲染反馈</span></div></div>
+          <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">处理并返回结果</span></div></div>
+        </div>
+      </div>
+      <p class="sw-note">图 1-1：三个参与者在两个阶段中的协作流转。泳道颜色区分参与者，时间从左到右推进。</p>
+
+      <!-- ========== 【Mermaid】单线流程 / 架构 / 时序 / 状态等用 ========== -->
+      <h3>图 1-2 XX 的系统架构（Mermaid）</h3>
+      <div class="mermaid">
+flowchart LR
+  A[用户] --> B[入口网关]
+  B --> C[核心服务]
+  C --> D[(数据存储)]
+  C --> E[外部依赖]
+      </div>
+      <p class="sw-note">图 1-2：XX 架构中各组件的依赖关系（离线时此图会降级显示为源码文本）。</p>
+
+      <!-- ========== 【代码示例】 ========== -->
+      <h2>1.3 第一个例子</h2>
+      <p>（说明这段代码做什么、怎么读。）</p>
+      <pre><code class="language-bash"># 示例：安装并验证（代码必须有注释和预期输出说明）
+$ xx --version
+xx 1.0.0   # ← 预期输出</code></pre>
+      <p class="code-caption">示例 1-1：安装 XX 并验证版本。上面输出说明安装成功。</p>
+
+      <!-- ========== 【术语卡片】 ========== -->
+      <h2>1.4 术语速查</h2>
+      <div class="terms">
+        <div class="term"><div class="term-name">术语 A</div><div class="term-def">一句话定义（用大白话，别抄官方文档）。</div></div>
+        <div class="term"><div class="term-name">术语 B</div><div class="term-def">一句话定义。</div></div>
+        <div class="term"><div class="term-name">术语 C</div><div class="term-def">一句话定义。</div></div>
+      </div>
+
+      <!-- ========== 【自测题】3-6 题，details 折叠答案 ========== -->
+      <h2>1.5 自测题</h2>
+      <div class="quiz">
+        <div class="q"><details><summary>XX 和 YY 的核心区别是什么？</summary><div class="a">（给出简洁答案与解释。）</div></details></div>
+        <div class="q"><details><summary>什么时候不应该用 XX？</summary><div class="a">（给出反例场景。）</div></details></div>
+        <div class="q"><details><summary>用自己的话描述 XX 的工作流程。</summary><div class="a">（给出参考表述。）</div></details></div>
+      </div>
+
+      <!-- ========== 【本章小结】 ========== -->
+      <h2>本章小结</h2>
+      <ul>
+        <li>（用 3-5 条 bullet 收拢本章核心结论。）</li>
+        <li>（呼应本章开头的学习目标。）</li>
+      </ul>
+
+      <!-- ========== 【延伸阅读】 ========== -->
+      <h2>延伸阅读</h2>
+      <ul>
+        <li>（官方文档 / 权威书籍 / 推荐博客，1-3 条即可，给名字和一句话理由，不必给易失效链接。）</li>
+      </ul>
+
+      <!-- 【下一章预告】 -->
+      <blockquote><strong>下一章预告：</strong>（一句话吊胃口 + 预告下一章标题，保持连续性）</blockquote>
+
+    </article>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">主题学习资料 · 第 01 章 · 返回 <a href="index.html">目录</a></div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

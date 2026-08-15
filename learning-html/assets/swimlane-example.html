@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html 泳道图示例（swimlane-example.html）
+  本文件是「泳道图组件」的活示例，画泳道图前先看这里。
+  可直接用浏览器打开本文件预览效果（需与 assets/style.css 同目录）。
+  两种变体：
+  · 变体 H（横向泳道，经典）：泳道 = 行（参与者），时间从左到右推进
+  · 变体 V（纵向泳道）：泳道 = 列（参与者），时间从上到下推进
+  通用要点：
+  1. 容器：<div class="swimlane" data-variant="h|v" style="--sw-lanes: 泳道数;">
+  2. 表头行：<div class="sw-head">，第一格是「阶段」标签，其余是参与者名
+  3. 数据行：<div class="sw-row">，第一格是阶段名 .sw-stage，其余是泳道单元格 .sw-cell
+  4. 每个 .sw-cell 里放 .sw-steps（一组步骤卡片，卡片间用 .sw-arrow 的 → 连接）
+  5. 泳道颜色：data-lane="l1"~"l5" 五档配色，同一参与者全程用同一个色
+  6. 必须写 role="img" + aria-label，图下方必须有 .sw-note 文字说明
+  7. 单元格留空表示该参与者在当前阶段不参与（视觉上自然产生「泳道」分隔）
+  ============================================================ -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>泳道图示例 — learning-html</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <div class="brand"><h1 class="site-title">泳道图示例（HTML/CSS 原生实现）</h1></div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换到深色模式">🌙 深色模式</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>变体 H：横向泳道（经典）</h1>
+    <p>泳道 = 行（参与者），时间从左到右。适合展示 2-4 个参与者的协作流程，是首选形态。</p>
+
+    <h3>示例：用户登录流程</h3>
+    <div class="swimlane" data-variant="h" style="--sw-lanes: 3;" role="img" aria-label="用户、前端、后端三方协作的用户登录流程泳道图">
+      <div class="sw-head">
+        <span class="sw-stage">阶段</span>
+        <span data-lane="l1">用户</span>
+        <span data-lane="l2">前端</span>
+        <span data-lane="l3">后端</span>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">发起登录</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">输入账号密码</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">表单校验</span><span class="sw-arrow">→</span><span class="sw-step">POST /login</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">校验凭据</span></div></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">返回结果</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">进入首页</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">渲染成功页</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">签发 Token</span><span class="sw-arrow">→</span><span class="sw-step">返回</span></div></div>
+      </div>
+    </div>
+    <p class="sw-note">登录流程：三个参与者在两个阶段中的协作。空白的泳道单元格表示该参与者当前阶段不参与。</p>
+
+    <h1>变体 V：纵向泳道</h1>
+    <p>泳道 = 列（参与者），时间从上到下。适合步骤较多、单步较长的流程。</p>
+
+    <h3>示例：下单支付流程</h3>
+    <div class="swimlane" data-variant="v" style="--sw-lanes: 3;" role="img" aria-label="买家、商城、支付渠道三方协作的下单支付流程泳道图">
+      <div class="sw-head">
+        <span class="sw-stage">阶段</span>
+        <span data-lane="l1">买家</span>
+        <span data-lane="l2">商城系统</span>
+        <span data-lane="l3">支付渠道</span>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">1. 下单</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">确认订单</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">锁定库存</span></div></div>
+        <div class="sw-cell" data-lane="l3"></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">2. 支付</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">选择支付方式</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">创建支付单</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">扣款</span></div></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">3. 完成</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">收到确认</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">更新订单状态</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">回调通知</span></div></div>
+      </div>
+    </div>
+    <p class="sw-note">下单支付：三个参与者的纵向泳道，时间自上而下，阶段标签在左侧。</p>
+
+    <h2>怎么扩展</h2>
+    <ul>
+      <li><strong>加泳道</strong>：改 <code>--sw-lanes: N</code>，在 sw-head 和每个 sw-row 里加对应数量的参与者列；参与者超过 5 个时循环使用 l1-l5 配色。</li>
+      <li><strong>加阶段</strong>：追加一个 <code>.sw-row</code> 行。</li>
+      <li><strong>同格多步</strong>：一个 <code>.sw-cell</code> 内放多个 <code>.sw-step</code>，用 <code>&lt;span class="sw-arrow"&gt;→&lt;/span&gt;</code> 连接。</li>
+      <li><strong>分支</strong>：把步骤写成「A → B（条件）→ C / D」两条路径，用文字标注条件。</li>
+      <li><strong>换色</strong>：泳道颜色由 <code>data-lane</code> 决定，映射 style.css 里的 <code>--lane-1..5</code>。</li>
+    </ul>
+
+    <div class="callout warning">
+      <div class="callout-title">⚠️ 什么时候别用泳道图</div>
+      <p>单角色单线流程（用 Mermaid flowchart 更合适）、纯状态流转（stateDiagram）、请求响应时序（sequenceDiagram）。泳道图的价值在于展示「多个参与者之间的分工与流转」。</p>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">learning-html · 泳道图示例</div>
+  </footer>
+</body>
+</html>
