@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html index page template (index-template.html)
+  Usage: copy this file to index.html in the output directory, then:
+  1. Update <title> and cover info (subject, intro, chapter count, estimated duration)
+  2. Replace window.CHAPTERS with the full chapter list (keep it identical to the one embedded in each chapter page)
+  3. Fill in the learning roadmap and the chapter cards (chapter-card), one card per chapter
+  4. Keep the style.css / app.js references and all structural blocks
+  ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subject Learning Material · Index</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    /* Full chapter list: keep [exactly identical] to the window.CHAPTERS embedded in each chapter page.
+       objectives = number of learning objectives for that chapter (the progress bar is computed from this) */
+    window.CHAPTERS = [
+      { file: "01-overview.html", title: "Domain Overview", objectives: 4 },
+      { file: "02-setup.html", title: "Environment Setup and Your First Example", objectives: 4 }
+      /* …append all chapters here; the count and titles must match the actual files */
+    ];
+  </script>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">Subject Learning Material</a></h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">🌙 Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ========== Cover ========== -->
+    <section class="cover">
+      <span class="cover-tag">📘 Beginner → Hands-on</span>
+      <h1>Subject Learning Material</h1>
+      <p class="cover-desc">(One sentence introducing this material: what you will learn, who it is for, and what you will be able to do when you finish.) The material has <strong>N chapters</strong> in total, arranged along a learning progression. We recommend going through them in order; every chapter ends with self-check questions to test your understanding.</p>
+      <p class="cover-meta">Estimated total time: about X hours ｜ Suggested pace: Y chapters per week ｜ Open in a browser — Chrome gives the best experience (supports progress tracking)</p>
+    </section>
+
+    <!-- ========== Learning Roadmap ========== -->
+    <h2>🗺️ Learning Roadmap (step by step)</h2>
+    <div class="roadmap">
+      <div class="rm-item"><div class="rm-title">Chapters 1-2 · Getting Started</div><div class="rm-desc">Get to know the field, set up your environment, run your first example, and build confidence.</div></div>
+      <div class="rm-item"><div class="rm-title">Chapters 3-5 · Core Concepts</div><div class="rm-desc">Go deep into each major concept one by one, with diagrams and examples, and lay a solid foundation.</div></div>
+      <div class="rm-item"><div class="rm-title">Chapters 6-8 · Going Further</div><div class="rm-desc">Underlying principles, best practices, and common patterns.</div></div>
+      <div class="rm-item"><div class="rm-title">Chapters 9-10 · Hands-on</div><div class="rm-desc">Tie everything together with a running case study that spans chapters.</div></div>
+      <div class="rm-item"><div class="rm-title">Chapters 11-12 · Wrapping Up</div><div class="rm-desc">Common pitfalls and troubleshooting, recap, and a path forward.</div></div>
+    </div>
+
+    <!-- ========== Chapter Cards ========== -->
+    <h2>📑 Table of Contents</h2>
+    <div class="chapter-grid">
+      <!-- One card per chapter: number + title + learning objective summary; href points to the chapter file -->
+      <a class="chapter-card" href="01-overview.html">
+        <div class="cc-num">Chapter 01</div>
+        <div class="cc-title">Domain Overview</div>
+        <div class="cc-goals">Learning objectives: what XX is, a panorama of core concepts, typical use cases, and building a learning roadmap.</div>
+      </a>
+      <a class="chapter-card" href="02-setup.html">
+        <div class="cc-num">Chapter 02</div>
+        <div class="cc-title">Environment Setup and Your First Example</div>
+        <div class="cc-goals">Learning objectives: install and configure, run your first example, verify the environment, and learn the common commands.</div>
+      </a>
+      <!-- …append one card per chapter -->
+    </div>
+
+    <!-- ========== Progress Overview (app.js fills the progress bars automatically) ========== -->
+    <h2>📊 Learning Progress</h2>
+    <div class="progress-list">
+      <!-- One progress bar per chapter: data-progress-chapter=file name, data-total=number of objectives -->
+      <div class="progress-item" data-progress-chapter="01-overview.html" data-total="4">
+        <div class="pi-label"><a href="01-overview.html">Chapter 01 · Domain Overview</a><span class="bar-text">0/4 mastered</span></div>
+        <div class="progress-track"><div class="bar-fill"></div></div>
+      </div>
+      <div class="progress-item" data-progress-chapter="02-setup.html" data-total="4">
+        <div class="pi-label"><a href="02-setup.html">Chapter 02 · Environment Setup and Your First Example</a><span class="bar-text">0/4 mastered</span></div>
+        <div class="progress-track"><div class="bar-fill"></div></div>
+      </div>
+      <!-- …append one progress bar per chapter, matching the chapter cards one-to-one -->
+    </div>
+
+    <!-- ========== Learning Tips ========== -->
+    <h2>💬 Learning Tips</h2>
+    <div class="callout tip">
+      <div class="callout-title">How to get the most out of this material</div>
+      <ul>
+        <li>Study the chapters in order. Start each chapter with the "Learning Objectives", check them off as you go, and your progress is saved automatically in the browser (it is lost if you switch browsers or clear the cache).</li>
+        <li>For each swimlane/architecture diagram, first re-explain it to yourself in your own words, then read the note below it — you only truly understand it when you can explain it out loud.</li>
+        <li>For the self-check questions, don't just read the answers — write your own answer from memory first.</li>
+        <li>Can't see a diagram? It may be because you opened the page offline: diagrams automatically degrade to their source text. Refresh while online to render them again.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">Subject Learning Material · N chapters in total · Best read in a modern browser such as Chrome</div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

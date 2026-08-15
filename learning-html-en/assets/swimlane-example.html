@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html swimlane diagram example (swimlane-example.html)
+  This file is a live example of the "swimlane diagram" component —
+  look here before drawing a swimlane diagram.
+  You can open this file directly in a browser to preview the result
+  (it must be in the same directory as assets/style.css).
+  Two variants:
+  · Variant H (horizontal swimlanes, classic): lanes = rows (participants), time flows left to right
+  · Variant V (vertical swimlanes): lanes = columns (participants), time flows top to bottom
+  General points:
+  1. Container: <div class="swimlane" data-variant="h|v" style="--sw-lanes: number of lanes;">
+  2. Header row: <div class="sw-head">; the first cell is the "Stage" label, the rest are participant names
+  3. Data rows: <div class="sw-row">; the first cell is the stage name .sw-stage, the rest are lane cells .sw-cell
+  4. Put .sw-steps inside each .sw-cell (a group of step cards, connected by .sw-arrow's →)
+  5. Lane colors: data-lane="l1"~"l5" gives five color schemes; the same participant keeps the same color throughout
+  6. role="img" + aria-label are required, and there must be a .sw-note text explanation below the diagram
+  7. An empty cell means the participant does not take part in that stage (this naturally creates the visual "lanes")
+  ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swimlane Diagram Example — learning-html</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <div class="brand"><h1 class="site-title">Swimlane Diagram Example (native HTML/CSS)</h1></div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">🌙 Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Variant H: Horizontal Swimlanes (classic)</h1>
+    <p>Lanes = rows (participants), time flows left to right. Best for showing collaboration flows between 2-4 participants; this is the go-to form.</p>
+
+    <h3>Example: User Login Flow</h3>
+    <div class="swimlane" data-variant="h" style="--sw-lanes: 3;" role="img" aria-label="Swimlane diagram of a user login flow involving three parties: user, frontend, and backend">
+      <div class="sw-head">
+        <span class="sw-stage">Stage</span>
+        <span data-lane="l1">User</span>
+        <span data-lane="l2">Frontend</span>
+        <span data-lane="l3">Backend</span>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">Initiate login</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Enter credentials</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Validate form</span><span class="sw-arrow">→</span><span class="sw-step">POST /login</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Verify credentials</span></div></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">Return result</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Enter the home page</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Render success page</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Issue token</span><span class="sw-arrow">→</span><span class="sw-step">Return</span></div></div>
+      </div>
+    </div>
+    <p class="sw-note">Login flow: collaboration among three participants across two stages. An empty swimlane cell means that participant does not take part in the current stage.</p>
+
+    <h1>Variant V: Vertical Swimlanes</h1>
+    <p>Lanes = columns (participants), time flows top to bottom. Best for flows with many steps or longer individual steps.</p>
+
+    <h3>Example: Order & Payment Flow</h3>
+    <div class="swimlane" data-variant="v" style="--sw-lanes: 3;" role="img" aria-label="Swimlane diagram of an order and payment flow involving three parties: buyer, store, and payment channel">
+      <div class="sw-head">
+        <span class="sw-stage">Stage</span>
+        <span data-lane="l1">Buyer</span>
+        <span data-lane="l2">Store system</span>
+        <span data-lane="l3">Payment channel</span>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">1. Place order</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Confirm order</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Lock inventory</span></div></div>
+        <div class="sw-cell" data-lane="l3"></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">2. Pay</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Choose payment method</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Create payment order</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Debit the account</span></div></div>
+      </div>
+      <div class="sw-row">
+        <span class="sw-stage">3. Complete</span>
+        <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Receive confirmation</span></div></div>
+        <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Update order status</span></div></div>
+        <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Send callback notification</span></div></div>
+      </div>
+    </div>
+    <p class="sw-note">Order & payment: a vertical swimlane with three participants, time running top to bottom, with stage labels on the left.</p>
+
+    <h2>How to Extend</h2>
+    <ul>
+      <li><strong>Add lanes</strong>: change <code>--sw-lanes: N</code> and add a matching number of participant columns in sw-head and in every sw-row; when there are more than 5 participants, cycle through the l1-l5 color schemes.</li>
+      <li><strong>Add stages</strong>: append a <code>.sw-row</code>.</li>
+      <li><strong>Multiple steps in one cell</strong>: put several <code>.sw-step</code> elements inside a single <code>.sw-cell</code>, connected with <code>&lt;span class="sw-arrow"&gt;→&lt;/span&gt;</code>.</li>
+      <li><strong>Branches</strong>: write the steps as two paths, e.g. "A → B (condition) → C / D", and label the condition in words.</li>
+      <li><strong>Change colors</strong>: lane colors are determined by <code>data-lane</code>, mapped to <code>--lane-1..5</code> in style.css.</li>
+    </ul>
+
+    <div class="callout warning">
+      <div class="callout-title">⚠️ When NOT to use a swimlane diagram</div>
+      <p>Single-role single-line flows (a Mermaid flowchart fits better), pure state transitions (stateDiagram), and request-response sequences (sequenceDiagram). The value of a swimlane diagram lies in showing the division of labor and the flow among multiple participants.</p>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">learning-html · Swimlane Diagram Example</div>
+  </footer>
+</body>
+</html>

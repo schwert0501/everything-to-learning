@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  learning-html chapter page template (chapter-template.html)
+  Usage: every chapter file is based on this template. Copy this file
+  to create a new chapter file, then:
+  1. Update <title> and window.CURRENT (the current chapter file name)
+  2. Replace window.CHAPTERS with the full chapter list that exactly
+     matches index.html
+  3. Replace all the [sample] content below with real content — do not
+     remove any structural blocks
+  4. Keep the style.css / app.js references (relative path assets/)
+  ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title format: chapter number · chapter title — subject learning material -->
+  <title>01 · Domain Overview — Subject Learning Material</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <!-- highlight.js theme (CDN; no highlighting when offline, but readability is unaffected) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+  <script>
+    /* Chapter list: keep [exactly identical] to window.CHAPTERS in index.html */
+    window.CHAPTERS = [
+      { file: "01-overview.html", title: "Domain Overview", objectives: 5 },
+      { file: "02-setup.html", title: "Environment Setup and Your First Example", objectives: 4 }
+      /* …append all chapters here; the count and titles must match the actual files */
+    ];
+    /* Current chapter file name (must match the file name; app.js uses it to generate prev/next navigation) */
+    window.CURRENT = "01-overview.html";
+  </script>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="brand">
+        <span class="chapter-badge">01</span>
+        <h1 class="site-title"><a href="index.html">Subject Learning Material</a></h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">🌙 Dark mode</button>
+    </div>
+  </header>
+
+  <!-- Chapter navigation: leave the container empty; app.js automatically fills in "Back to index / Previous / Next" -->
+  <nav id="chapter-nav" aria-label="Chapter navigation"></nav>
+
+  <main class="container">
+    <article>
+
+      <h1>Chapter 01 · Domain Overview</h1>
+      <div class="chapter-meta">
+        <span class="chip">⏱ Estimated time: 45 minutes</span>
+        <span class="chip">📖 Prerequisites: none</span>
+      </div>
+
+      <!-- [Learning Objectives] 3-6 checkable items; data-key may be left empty (app.js generates it automatically) -->
+      <section class="objectives" aria-label="Learning objectives for this chapter">
+        <h2>🎯 Learning Objectives (check them off when done; progress is saved automatically)</h2>
+        <ul>
+          <li><input type="checkbox" class="obj-check"><label>Explain in your own words what XX is and what problem it solves</label></li>
+          <li><input type="checkbox" class="obj-check"><label>Understand the core concepts and the big picture of XX</label></li>
+          <li><input type="checkbox" class="obj-check"><label>Know the typical use cases and real-world examples of XX</label></li>
+          <li><input type="checkbox" class="obj-check"><label>Build a roadmap for your further learning</label></li>
+        </ul>
+      </section>
+
+      <!-- [Previous Chapter Recap] Optional for Chapter 01; add a bridging sentence at the start of later chapters -->
+      <blockquote><strong>Previous chapter recap:</strong> (From Chapter 02 onward: what you mastered in the previous chapter and how this chapter will use it)</blockquote>
+
+      <h2>1.1 Why Learn XX</h2>
+      <p>(Body paragraph. Use a relatable analogy to explain what XX is and what problem it solves; make clear what you will be able to do after learning it. <strong>Bold</strong> a term the first time it appears.)</p>
+
+      <div class="callout tip">
+        <div class="callout-title">💡 In one sentence</div>
+        <p>(Compress the chapter's core idea into one memorable sentence.)</p>
+      </div>
+
+      <!-- [Callout] Four kinds: info / tip / warning / danger -->
+      <div class="callout warning">
+        <div class="callout-title">⚠️ Common misconceptions</div>
+        <p>(The points beginners most often misunderstand.)</p>
+      </div>
+
+      <h2>1.2 Core Concepts at a Glance</h2>
+      <p>(Introduce the 2-3 core concepts covered in this chapter, accompanied by a diagram.)</p>
+
+      <!-- ========== [Swimlane Diagram] For multi-role / multi-system collaboration flows (preferred) ==========
+           Structure: data-variant="h" (horizontal swimlane, lanes = rows); lane colors via data-lane="l1".."l5"
+           Place step cards inside .sw-cell; connect multiple steps with <span class="sw-arrow">→</span>
+           aria-label is required; always add a .sw-note text explanation below the diagram -->
+      <h3>Figure 1-1 A typical XX flow (swimlane diagram)</h3>
+      <div class="swimlane" data-variant="h" style="--sw-lanes: 3;" role="img" aria-label="Swimlane diagram of an XX flow involving three parties: user, client, and server">
+        <div class="sw-head">
+          <span class="sw-stage">Stage</span>
+          <span data-lane="l1">User</span>
+          <span data-lane="l2">Client</span>
+          <span data-lane="l3">Server</span>
+        </div>
+        <div class="sw-row">
+          <span class="sw-stage">Step 1</span>
+          <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">Initiate action</span></div></div>
+          <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Build request</span><span class="sw-arrow">→</span><span class="sw-step">Send</span></div></div>
+          <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Receive and validate</span></div></div>
+        </div>
+        <div class="sw-row">
+          <span class="sw-stage">Step 2</span>
+          <div class="sw-cell" data-lane="l1"><div class="sw-steps"><span class="sw-step">View result</span></div></div>
+          <div class="sw-cell" data-lane="l2"><div class="sw-steps"><span class="sw-step">Render feedback</span></div></div>
+          <div class="sw-cell" data-lane="l3"><div class="sw-steps"><span class="sw-step">Process and return result</span></div></div>
+        </div>
+      </div>
+      <p class="sw-note">Figure 1-1: the collaboration flow of three participants across two stages. Lane colors distinguish the participants; time progresses from left to right.</p>
+
+      <!-- ========== [Mermaid] For single-line flows / architecture / sequence / state, etc. ========== -->
+      <h3>Figure 1-2 System architecture of XX (Mermaid)</h3>
+      <div class="mermaid">
+flowchart LR
+  A[User] --> B[Edge Gateway]
+  B --> C[Core Service]
+  C --> D[(Data Store)]
+  C --> E[External Dependency]
+      </div>
+      <p class="sw-note">Figure 1-2: the dependencies among the components in the XX architecture (when offline, this diagram degrades to its source text).</p>
+
+      <!-- ========== [Code Example] ========== -->
+      <h2>1.3 Your First Example</h2>
+      <p>(Explain what this code does and how to read it.)</p>
+      <pre><code class="language-bash"># Example: install and verify (the code must include comments and expected output)
+$ xx --version
+xx 1.0.0   # ← expected output</code></pre>
+      <p class="code-caption">Example 1-1: install XX and verify the version. The output above indicates a successful installation.</p>
+
+      <!-- ========== [Glossary Cards] ========== -->
+      <h2>1.4 Glossary at a Glance</h2>
+      <div class="terms">
+        <div class="term"><div class="term-name">Term A</div><div class="term-def">One-sentence definition (in plain words, not copied from the official docs).</div></div>
+        <div class="term"><div class="term-name">Term B</div><div class="term-def">One-sentence definition.</div></div>
+        <div class="term"><div class="term-name">Term C</div><div class="term-def">One-sentence definition.</div></div>
+      </div>
+
+      <!-- ========== [Self-check Questions] 3-6 questions; details folds the answers ========== -->
+      <h2>1.5 Self-check Questions</h2>
+      <div class="quiz">
+        <div class="q"><details><summary>What is the core difference between XX and YY?</summary><div class="a">(Give a concise answer with an explanation.)</div></details></div>
+        <div class="q"><details><summary>When should you NOT use XX?</summary><div class="a">(Give a counterexample scenario.)</div></details></div>
+        <div class="q"><details><summary>Describe XX's workflow in your own words.</summary><div class="a">(Provide a reference answer.)</div></details></div>
+      </div>
+
+      <!-- ========== [Chapter Summary] ========== -->
+      <h2>Chapter Summary</h2>
+      <ul>
+        <li>(Wrap up the chapter's key takeaways in 3-5 bullet points.)</li>
+        <li>(Echo the learning objectives from the start of this chapter.)</li>
+      </ul>
+
+      <!-- ========== [Further Reading] ========== -->
+      <h2>Further Reading</h2>
+      <ul>
+        <li>(Official docs / authoritative books / recommended blogs — 1-3 items is enough. Give the name and a one-line reason; no need for links that may go stale.)</li>
+      </ul>
+
+      <!-- [Next Chapter Preview] -->
+      <blockquote><strong>Next chapter preview:</strong> (one teaser line + the title of the next chapter, to keep continuity)</blockquote>
+
+    </article>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">Subject Learning Material · Chapter 01 · Back to <a href="index.html">Index</a></div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
